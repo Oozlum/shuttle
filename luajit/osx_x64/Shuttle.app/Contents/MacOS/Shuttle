@@ -1,0 +1,10 @@
+#!/bin/bash
+
+EXE_PATH=${0%/*/*}
+if [ ! -d $EXE_PATH ]; then EXE_PATH=${PWD%/*}; fi
+EXE_BIN="$EXE_PATH/Shuttle"
+if [[ ! -e "$EXE_BIN/libedit.3.dylib" && ! -e /usr/lib/libedit.3.dylib ]]
+then ln -s /usr/lib/libedit.2.dylib "$EXE_BIN/libedit.3.dylib"; fi
+export DYLD_LIBRARY_PATH="$EXE_BIN${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}"
+cd "$EXE_PATH/Shuttle"
+exec ./shuttle "$@"
