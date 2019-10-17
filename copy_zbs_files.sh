@@ -30,30 +30,30 @@ done
 
 # Lua C libraries
 for dir in mime socket git; do
-  mkdir -p ${MAC_DIR}/libs/${dir}
-  mkdir -p ${WIN_DIR}/libs/${dir}
-  mkdir -p ${LINUX32_DIR}/libs/${dir}
-  mkdir -p ${LINUX64_DIR}/libs/${dir}
+  mkdir -p ${MAC_DIR}/lib/${dir}
+  mkdir -p ${WIN_DIR}/lib/${dir}
+  mkdir -p ${LINUX32_DIR}/lib/${dir}
+  mkdir -p ${LINUX64_DIR}/lib/${dir}
 done
 
 for file in lfs lpeg ssl lexlpeg git/core mime/core socket/core; do
-  cp ${ZBS_GIT_DIR}/bin/clibs/${file}.dylib ${MAC_DIR}/libs/${file}.dylib
-  cp ${ZBS_GIT_DIR}/bin/clibs/${file}.dll ${WIN_DIR}/libs/${file}.dll
-  cp ${ZBS_GIT_DIR}/bin/linux/x86/clibs/${file}.so ${LINUX32_DIR}/libs/${file}.so
-  cp ${ZBS_GIT_DIR}/bin/linux/x64/clibs/${file}.so ${LINUX64_DIR}/libs/${file}.so
+  cp ${ZBS_GIT_DIR}/bin/clibs/${file}.dylib ${MAC_DIR}/lib/${file}.dylib
+  cp ${ZBS_GIT_DIR}/bin/clibs/${file}.dll ${WIN_DIR}/lib/${file}.dll
+  cp ${ZBS_GIT_DIR}/bin/linux/x86/clibs/${file}.so ${LINUX32_DIR}/lib/${file}.so
+  cp ${ZBS_GIT_DIR}/bin/linux/x64/clibs/${file}.so ${LINUX64_DIR}/lib/${file}.so
 done
 
-cp ${ZBS_GIT_DIR}/bin/clibs/libwx.dylib ${MAC_DIR}/libs
-cp ${ZBS_GIT_DIR}/bin/clibs/wx.dll ${WIN_DIR}/libs
-cp ${ZBS_GIT_DIR}/bin/linux/x86/clibs/libwx.so ${LINUX32_DIR}/libs
-cp ${ZBS_GIT_DIR}/bin/linux/x64/clibs/libwx.so ${LINUX64_DIR}/libs
+cp ${ZBS_GIT_DIR}/bin/clibs/libwx.dylib ${MAC_DIR}/lib
+cp ${ZBS_GIT_DIR}/bin/clibs/wx.dll ${WIN_DIR}/lib
+cp ${ZBS_GIT_DIR}/bin/linux/x86/clibs/libwx.so ${LINUX32_DIR}/lib
+cp ${ZBS_GIT_DIR}/bin/linux/x64/clibs/libwx.so ${LINUX64_DIR}/lib
 
 for file in libzlib.dll winapi.dll; do
-  cp ${ZBS_GIT_DIR}/bin/clibs/${file} ${WIN_DIR}/libs/${file}
+  cp ${ZBS_GIT_DIR}/bin/clibs/${file} ${WIN_DIR}/lib/${file}
 done
 
-cp -r ${ZBS_GIT_DIR}/lualibs ${MAC_DIR}/lua
-cp -r ${ZBS_GIT_DIR}/lualibs ${WIN_DIR}/lua
-cp -r ${ZBS_GIT_DIR}/lualibs ${LINUX32_DIR}/lua
-cp -r ${ZBS_GIT_DIR}/lualibs ${LINUX64_DIR}/lua
+for dir in ${MAC_DIR} ${WIN_DIR} ${LINUX32_DIR} ${LINUX64_DIR}; do
+  mkdir -p ${dir}/lua
+  cp -r ${ZBS_GIT_DIR}/lualibs/* ${dir}/lua
+done
 
